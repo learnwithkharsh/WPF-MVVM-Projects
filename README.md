@@ -5,6 +5,12 @@ A complete collection of modern WPF tutorials and real-world desktop application
 This repository is designed for beginners to advanced developers who want to master WPF with practical examples and modern UI development techniques.
 
 ---
+## ☕ Support My Work
+
+If my WPF and C# tutorials helped you and you'd like to support my work, you can send an Amazon Gift Card code using the link below 😊
+
+📧 Send Gift Card Code: [Send Code](https://wpfcsharpmetroui.blogspot.com/p/contact.html#gsc.tab=0)
+---
 
 # 🛠️ Technologies Used
 
