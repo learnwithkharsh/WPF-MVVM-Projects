@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="WpfApp.Views.RegistrationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp.Views"
+             mc:Ignorable="d" 
+             xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:beh="clr-namespace:MahApps.Metro.Behaviors;assembly=MahApps.Metro">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <!-- Column Definitions -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Row Definitions -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="5" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <!-- Header -->
+            <Image Width="150" Height="150"
+               Source="/logo.png"
+               Margin="5"/>
+            <TextBlock 
+                   Text="User Registration"
+                   FontSize="20"
+                   FontWeight="Bold"
+                  />
+        </StackPanel>
+
+        <!-- Full Name -->
+        <TextBlock Grid.Row="1" Text="Full Name:" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="1" Grid.Column="1" Height="30" Margin="5" Text="{Binding FullName}" />
+
+        <!-- Email -->
+        <TextBlock Grid.Row="2" Text="Email Address:" VerticalAlignment="Center" Margin="5"/>
+        <TextBox Grid.Row="2" Grid.Column="1" Height="30" Margin="5" Text="{Binding Email}"/>
+
+        <!-- Password -->
+        <TextBlock Grid.Row="3" Text="Password:" VerticalAlignment="Center" Margin="5"/>
+        <PasswordBox mah:TextBoxHelper.Watermark="Password" Grid.Row="3" Grid.Column="1" Height="40" Margin="5"
+                 Style="{StaticResource MahApps.Styles.PasswordBox.Button}"
+                 mah:TextBoxHelper.ClearTextButton="True"
+                 mah:PasswordBoxHelper.CapsLockWarningToolTip="This is password"
+                 mah:TextBoxHelper.UseFloatingWatermark="True"
+                 beh:PasswordBoxBindingBehavior.Password="{Binding Password}"
+                 />
+
+        <!-- Gender (RadioButton) -->
+        <TextBlock Grid.Row="4" Text="Gender:" VerticalAlignment="Center" Margin="5"/>
+        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal" Margin="5">
+            <RadioButton Content="Male" Margin="0 0 10 0" x:Name="rbnMale" IsChecked="{Binding Gender,Converter={StaticResource GenderToBoolConverter}, ConverterParameter=Male}"/>
+            <RadioButton Content="Female" x:Name="rbnfeMale" IsChecked="{Binding Gender,Converter={StaticResource GenderToBoolConverter}, ConverterParameter=Female}"/>
+        </StackPanel>
+
+        <!-- Country (ComboBox) -->
+        <TextBlock Grid.Row="5" Text="Country:" VerticalAlignment="Center" Margin="5"/>
+        <ComboBox Grid.Row="5" Grid.Column="1" Height="30" Margin="5" x:Name="country" ItemsSource="{Binding Countries}"
+              SelectedItem="{Binding SelectedCountry}">
+            <!--<ComboBoxItem Content="India"/>
+        <ComboBoxItem Content="USA"/>
+        <ComboBoxItem Content="UK"/>-->
+        </ComboBox>
+
+        <!-- Skills (CheckBox) -->
+        <TextBlock Grid.Row="6" Text="Skills:" VerticalAlignment="Center" Margin="5"/>
+        <StackPanel Grid.Row="6" Grid.Column="1" Margin="5">
+            <CheckBox Content="C#" x:Name="chkcsharp" IsChecked="{Binding SkillCSharp}"/>
+            <CheckBox Content="WPF" x:Name="chkWpf" IsChecked="{Binding SkillWpf}"/>
+            <CheckBox Content=".NET" x:Name="chkDotNet" IsChecked="{Binding SkillDotNet}"/>
+        </StackPanel>
+        <!-- Experience -->
+        <TextBlock Text="Experience Level" Grid.Row="7" Margin="5" VerticalAlignment="Center"/>
+
+        <Slider Grid.Row="7" Grid.Column="1" Margin="5" Minimum="0" Maximum="5"  Value="{Binding Experience}"/>
+        <TextBlock Grid.Row="7" Grid.Column="1" FontWeight="Bold" Margin="5" Name="txtExperience" HorizontalAlignment="Center"/>
+
+        <!-- Terms -->
+        <TextBlock Grid.Row="8" Text="Agreement:" VerticalAlignment="Center" Margin="5"/>
+        <CheckBox Grid.Row="8" Grid.Column="1" x:Name="chkTerm" IsChecked="{Binding IsTermsAccepted}"
+                  Content="I accept terms and conditions" Margin="5"/>
+
+        <!-- Submit Button -->
+        <Button Grid.Row="9"
+                Grid.ColumnSpan="2"
+                Content="Register"
+                Height="40"
+                Margin="5"
+                Background="#007ACC"
+                Foreground="White"
+                FontWeight="Bold" Command="{Binding RegisterCommand}" CommandParameter="Cliked"/>
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,133 @@
+﻿<Controls:MetroWindow x:Class="WpfApp.Views.AddEmployeeView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp.Views"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        mc:Ignorable="d"
+        Title="{Binding Title}"
+        Height="580"
+        Width="420"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Controls:MetroWindow.Resources>
+        <sys:String x:Key="JsonWatermark"
+                    xml:space="preserve"
+                xmlns:sys="clr-namespace:System;assembly=mscorlib">
+Enter employe in json format like
+  [
+      {
+        "Name": "Harsh",
+        "Company": "Amazon",
+        "Email": "harsh@wpfworld.com",
+        "Gender": "Male",
+        "Country": "India",
+        "Role": "Developer",
+        "Experience": 10
+      },
+      {
+        "Name": "Kumar",
+        "Company": "Amazon",
+        "Email": "kumar@wpfworld.com",
+        "Gender": "Male",
+        "Country": "India",
+        "Role": "Developer",
+        "Experience": 29
+      }
+  ]
+        </sys:String>
+    </Controls:MetroWindow.Resources>
+    <Grid Margin="20" RowDefinitions="auto,*,auto">        
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="Option: "
+                        VerticalAlignment="Center"/>
+            <ComboBox ItemsSource="{Binding Options}"
+                      SelectedItem="{Binding SelectedOption}"
+                      SelectedIndex="0"
+                      Width="200" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Visibility="{Binding FormVisibility}" Margin="5">
+
+            <!-- Name -->
+            <TextBlock Text="Full Name"/>
+            <TextBox Text="{Binding Employee.Name}" 
+                         Margin="0,5,0,10"
+                         Controls:TextBoxHelper.Watermark="Enter full name"/>
+
+            <!-- Email -->
+            <TextBlock Text="Email"/>
+            <TextBox Text="{Binding Employee.Email}"
+                         Margin="0,5,0,10"
+                         Controls:TextBoxHelper.Watermark="Enter email"/>
+
+            <!-- Company -->
+            <TextBlock Text="Company"/>
+            <TextBox Text="{Binding Employee.Company}"
+                         Margin="0,5,0,10"
+                         Controls:TextBoxHelper.Watermark="Enter company"/>
+
+            <!-- Gender -->
+            <TextBlock Text="Gender"/>
+            <ComboBox ItemsSource="{Binding Genders}"
+                          SelectedItem="{Binding Employee.Gender}"
+                          Margin="0,5,0,10"/>
+
+
+            <!-- Country -->
+            <TextBlock Text="Country"/>
+
+            <ComboBox SelectedItem="{Binding Employee.Country}"
+                          ItemsSource="{Binding Countries}"
+                          Margin="0,5,0,10"/>
+
+            <!-- Role -->
+            <TextBlock Text="Role"/>
+            <ComboBox SelectedItem="{Binding Employee.Role}"
+                          ItemsSource="{Binding Roles}"
+                          Margin="0,5,0,10"/>
+
+            <!-- Experience -->
+            <TextBlock Text="Experience (Years)"/>
+            <Grid>
+                <Slider Margin="0,5,0,10"  Maximum="25"  Value="{Binding Employee.Experience}"/>
+                <TextBlock FontWeight="Bold" FontSize="40" 
+                           Text="{Binding Employee.Experience}" 
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="0,5,0,10" />
+            </Grid>
+
+
+        </StackPanel>
+
+        <TextBox AcceptsReturn="True" 
+                 Grid.Row="1"
+                 Visibility="{Binding JsonVisibility}"
+                 Text="{Binding JSONContent}"
+                 Margin="0,5,0,10"
+                 Controls:TextBoxHelper.Watermark="{StaticResource JsonWatermark}"
+                 />
+
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="0,15,0,0">
+
+            <Button Content="Cancel"
+                    Width="90"
+                    Margin="5"
+                    Style="{DynamicResource MahApps.Styles.Button.Flat}"
+                    Command="{Binding CloseCommand}"/>
+
+            <Button Content="{Binding ButtonText}"
+                    Width="100"
+                    Margin="5"
+                    Style="{DynamicResource MahApps.Styles.Button.Accent}"
+                    Command="{Binding CloseCommand}"/>
+
+        </StackPanel>
+
+    </Grid>
+</Controls:MetroWindow>
